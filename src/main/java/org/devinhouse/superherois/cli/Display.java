@@ -3,13 +3,14 @@ package org.devinhouse.superherois.cli;
 import org.devinhouse.superherois.model.Heroi;
 import org.devinhouse.superherois.model.Personagem;
 import org.devinhouse.superherois.model.Vilao;
+import org.devinhouse.superherois.repository.PersonagemRepository;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Display {
     public static void cadastrarPersonagem() {
-        ArrayList<Personagem> lista = new ArrayList<Personagem>();
+        PersonagemRepository pr = new PersonagemRepository();
         while (true) {
             int op;
             Scanner sc = new Scanner(System.in);
@@ -29,7 +30,7 @@ public class Display {
                     System.out.print("Digite o nome real do herói: ");
                     String nomeReal = sc.nextLine();
                     Heroi heroi = new Heroi(nomeH, superpoderH, nomeReal);
-                    lista.add(heroi);
+                    pr.salvarPersonagem(heroi);
                     System.out.println("\nPersonagem cadastrado com sucesso");
                     break;
                 case 2:
@@ -42,7 +43,7 @@ public class Display {
                     try {
                         int tempoDePrisao = Integer.parseInt(sc.nextLine());
                         Vilao vilao = new Vilao(nomeV, superpoderV, tempoDePrisao);
-                        lista.add(vilao);
+                        pr.salvarPersonagem(vilao);
                         System.out.println("\nPersonagem cadastrado com sucesso");
                         break;
                     } catch (NumberFormatException e) {
@@ -51,11 +52,7 @@ public class Display {
                     }
                 case 3:
                     System.out.println("\nListar");
-                    for (Personagem p: lista
-                         ) {
-                        System.out.println(p.toString());
-
-                    }
+                    pr.listarPersonagem();
                     break;
                 case 4:
                     return;
