@@ -1,5 +1,6 @@
 package org.devinhouse.superherois.cli;
 
+import org.devinhouse.superherois.exception.OpcaoInvalidaException;
 import org.devinhouse.superherois.model.Heroi;
 import org.devinhouse.superherois.model.Personagem;
 import org.devinhouse.superherois.model.Vilao;
@@ -20,6 +21,11 @@ public class Display {
                     "4 - Sair\n" +
                     "Escolha uma das opções acima: ");
             op = Integer.parseInt(sc.nextLine());
+            try {
+                testarOpcao(op);
+            } catch (OpcaoInvalidaException e) {
+                System.out.println(e.getMessage());
+            }
             switch (op) {
                 case 1:
                     System.out.println("\nCadastrar Herói");
@@ -58,6 +64,11 @@ public class Display {
                     return;
                 default:
             }
+        }
+    }
+    static void testarOpcao(int op) throws OpcaoInvalidaException {
+        if(op < 1 || op > 4) {
+            throw new OpcaoInvalidaException("A opção informada é inválida. Tente novamente");
         }
     }
 }
