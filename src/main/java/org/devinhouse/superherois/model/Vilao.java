@@ -7,4 +7,11 @@ public class Vilao extends Personagem{
         this.superpoder = superpoder;
         this.tempoDePrisao = tempoDePrisao;
     }
+    @Override
+    public String toString() {
+        return "\nVilão" +
+                "\nNome: " + nome +
+                "\nSuperpoder: " + superpoder +
+                "\nTempo de prisão: " + tempoDePrisao;
+    }
 }
